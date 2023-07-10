@@ -137,20 +137,21 @@ on `GitHub
 
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
-
+MICROBLOG_FOLDER = "micro"
+   Folder containing your micro blog posts.
 MICROBLOG_MAX_LENGTH = 140
    How long should your micro blog posts ve limited to. Pelican will emit a
    warning if you exceed this.
-MICROBLOG_SLUG = f"u{post_date:%Y%m%d%H%M}"
+MICROBLOG_SAVE_AS = ARTICLE_SAVE_AS
+   What to save the micro blog posts output file as. Defaults to using the same
+   file structure as you are using for articles. c.f. ``MICROBLOG_URL``.
+MICROBLOG_SLUG = "u{date:%Y%m%d%H%M}"
    The slug that will be used for micro blog posts. Eg. ``u202307091701``.
 
    Note that Pelican expects slugs to be universally unique.
 MICROBLOG_URL = ARTICLE_URL
    What URL to post the micro blog posts to. Defaults to using the same URL
-   structure as you are using for articles.
-MICROBLOG_SAVE_AS = ARTICLE_SAVE_AS
-   What to save the micro blog posts output file as. Defaults to using the same
-   file structure as you are using for articles.
+   structure as you are using for articles. c.f. ``MICROBLOG_SAVE_AS``.
 
 .. Changelog
 .. Known Issues
