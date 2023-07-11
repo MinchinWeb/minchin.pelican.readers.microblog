@@ -36,11 +36,9 @@ Quickstart
 4. Create a new post in your ``micro`` folder. This can be generally be just
    the text (body) of your post. In terms of metadata, ``title`` is unneeded
    (and ignored), ``slug`` will be auto-generated (based on the post date), and
-   ``date`` will determined from the file creation datetime of the post file
-   (although you may want to provide it in the post metadata). Depending on
-   your settings, you may need to provide an ``author``. Your post can be in
-   any format Pelican can read (by default, Markdown, ReStructured Text, or
-   HTML).
+   ``date`` will determined from the file creation datetime of the post file.
+   If you provide the ``date``, it must be on the first line, in ``key: value``
+   format. The text body will be read as plain text!
 5. Regenerate your Pelican site!
 
 Sample (Micro) Post File
@@ -50,11 +48,10 @@ Sample (Micro) Post File
 
    <!-- ./content/micro/202307091701.md -->
 
-   created: 2023-07-09 17:01+0600
-   ---
+   date: 2023-07-09 17:01+0600
 
    I'm microblogging with Pelican!
-   <https://blog.minchin.ca/label/microblogging-pelican>
+   https://blog.minchin.ca/label/microblogging-pelican
 
 Background Notes (on Micro Blogging)
 ------------------------------------
@@ -138,7 +135,7 @@ on `GitHub
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
 MICROBLOG_FOLDER = "micro"
-   Folder containing your micro blog posts.
+   Folder containing your micro blog posts, relative to your content root.
 MICROBLOG_MAX_LENGTH = 140
    How long should your micro blog posts ve limited to. Pelican will emit a
    warning if you exceed this.
