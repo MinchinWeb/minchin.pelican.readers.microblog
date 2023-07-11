@@ -1,0 +1,18 @@
+releaser:
+    module_name: minchin.pelican.readers.microblog
+    pypi_name: minchin.pelican.readers.microblog
+    here: .
+    docs: none
+    test: test
+    source: minchin
+    changelog: CHANGELOG.rst
+    version: minchin/pelican/readers/microblog/constants.py
+    test_command: none
+    version_bump: none
+    extra_packages:
+        test:
+            - pelican
+            - setuptools
+            - wheel
+            - semantic-version
+        pypi:
