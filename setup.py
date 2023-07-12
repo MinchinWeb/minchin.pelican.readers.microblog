@@ -50,13 +50,13 @@ INSTALL_REQUIRES = [
     "minchin.pelican.plugins.autoloader >= 1.2.0",
     "pelican",
     "markupsafe",
+    "jinja2",
 ]
 
 EXTRA_REQUIRES = {
     "build": [
         # "pip-tools",
         "minchin.releaser >= 0.8.2",
-        # less, installed via npm  # npm install less -g
     ],
     "docs": [
         # 'sphinx >= 1.4',  # theme requires at least 1.4
@@ -78,6 +78,8 @@ EXTRA_REQUIRES = {
     "dev": [
         "markdown",
         "invoke",
+        "black",
+        "isort",
     ],
 }
 
@@ -91,7 +93,7 @@ CLASSIFIERS = [
     # 'Development Status :: 2 - Pre-Alpha',
     # 'Development Status :: 3 - Alpha',
     # "Development Status :: 4 - Beta",
-    'Development Status :: 5 - Production/Stable',
+    "Development Status :: 5 - Production/Stable",
     # 'Development Status :: 6 - Mature',
     # 'Development Status :: 7 - Inactive',
     "Environment :: Console",

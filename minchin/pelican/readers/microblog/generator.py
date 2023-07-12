@@ -1,20 +1,14 @@
-import datetime
-import re
 import logging
 import os
 
-from pelican import signals
-from pelican.contents import Article
-from pelican.readers import BaseReader
-from pelican.utils import get_date, pelican_open
-from pelican.readers import MarkdownReader
-
-from markupsafe import Markup
 from jinja2.utils import url_quote
+from markupsafe import Markup
 
-from .constants import (
-    LOG_PREFIX,
-)
+from pelican.contents import Article
+from pelican.readers import MarkdownReader  # BaseReader
+from pelican.utils import get_date, pelican_open
+
+from .constants import LOG_PREFIX
 
 logger = logging.getLogger(__name__)
 
@@ -39,15 +33,9 @@ def addMicroArticle(articleGenerator):
     for post in articleGenerator.get_files(
         paths=settings["MICROBLOG_FOLDER"], extensions=file_extensions
     ):
-        # raw_content = pelican_open(post)
-        # print(post, type(post))
-        # print(settings)
         post = settings["PATH"] + os.sep + post
 
         content, metadata = myMarkdownReader.read(source_path=post)
-
-        # print(settings["MICROBLOG_SLUG"])
-        print(metadata)
 
         new_article_metadata = {
             "category": myBaseReader.process_metadata("category", "µ"),
@@ -57,15 +45,23 @@ def addMicroArticle(articleGenerator):
 
         post_slug = settings["MICROBLOG_SLUG"].format(**metadata)
         metadata["slug"] = post_slug
-        
-        new_article_metadata["title"] = myBaseReader.process_metadata("title", post_slug)
+
+        new_article_metadata["title"] = myBaseReader.process_metadata(
+            "title", post_slug
+        )
         new_article_metadata["date"] = metadata["date"]
         new_article_metadata["slug"] = post_slug
-        new_article_metadata["save_as"] = myBaseReader.process_metadata("save_as", settings["MICROBLOG_SAVE_AS"].format(**metadata))
-        new_article_metadata["url"] = myBaseReader.process_metadata("url", settings["MICROBLOG_URL"].format(**metadata))
+        new_article_metadata["save_as"] = myBaseReader.process_metadata(
+            "save_as", settings["MICROBLOG_SAVE_AS"].format(**metadata)
+        )
+        new_article_metadata["url"] = myBaseReader.process_metadata(
+            "url", settings["MICROBLOG_URL"].format(**metadata)
+        )
 
         if "image" in metadata.keys():
-            new_article_metadata["image"] = myBaseReader.process_metadata("image", metadata["image"])
+            new_article_metadata["image"] = myBaseReader.process_metadata(
+                "image", metadata["image"]
+            )
 
             # add image link to end of content
             image_url = f'{settings["SITEURL"]}/{metadata["image"]}'
@@ -90,7 +86,7 @@ def addMicroArticle(articleGenerator):
                 )
             )
         new_article_metadata["char_len"] = post_len
-        
+
         print(post_len)
 
         new_article = Article(
@@ -100,11 +96,6 @@ def addMicroArticle(articleGenerator):
 
         articleGenerator.articles.insert(0, new_article)
         _micropost_count += 1
-
-        # logging.debug(
-        #     '%s MICROBLOG_FOLDER set to "%s"'
-        #     % (LOG_PREFIX, pelican.settings["MICROBLOG_FOLDER"])
-        # )
 
 
 def pelican_finalized(pelican):

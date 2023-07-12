@@ -71,14 +71,13 @@ def check_settings(pelican):
             % (LOG_PREFIX, pelican.settings["MICROBLOG_URL"])
         )
 
-    pelican.settings["ARTICLE_EXCLUDES"] += [pelican.settings["MICROBLOG_FOLDER"], ]
+    pelican.settings["ARTICLE_EXCLUDES"] += [
+        pelican.settings["MICROBLOG_FOLDER"],
+    ]
     logger.debug(
         '%s ARTICLE_EXCLUDES updated to "%s"'
         % (LOG_PREFIX, pelican.settings["ARTICLE_EXCLUDES"])
     )
-
-    # from pprint import pprint
-    # pprint(pelican.settings)
 
 
 def microblog_version(pelican):
@@ -89,7 +88,8 @@ def microblog_version(pelican):
     if "MICROBLOG_VERSION" not in pelican.settings.keys():
         pelican.settings["MICROBLOG_VERSION"] = __version__
         logger.debug(
-            '%s Adding Microblog version "%s" to context.' % (LOG_PREFIX, pelican.settings["MICROBLOG_VERSION"])
+            '%s Adding Microblog version "%s" to context.'
+            % (LOG_PREFIX, pelican.settings["MICROBLOG_VERSION"])
         )
     else:
         logger.debug(
@@ -100,7 +100,8 @@ def microblog_version(pelican):
     if "MICROBLOG_DEV_URL" not in pelican.settings.keys():
         pelican.settings["MICROBLOG_DEV_URL"] = __url__
         logger.debug(
-            '%s Adding Microblog Dev URL "%s" to context.' % (LOG_PREFIX, pelican.settings["MICROBLOG_DEV_URL"])
+            '%s Adding Microblog Dev URL "%s" to context.'
+            % (LOG_PREFIX, pelican.settings["MICROBLOG_DEV_URL"])
         )
     else:
         logger.debug(
