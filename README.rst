@@ -53,6 +53,21 @@ Sample (Micro) Post File
    I'm microblogging with Pelican!
    https://blog.minchin.ca/label/microblogging-pelican
 
+Or a post with an image:
+
+.. code-block:: md
+
+   <!-- ./content/micro/202307112138.md -->
+
+   date: 2023-07-11 21:38-0600
+   image: images/birger-strahl-olI66vtMgNo-unsplash.jpg
+
+   Microblog posts can have "feature" images too! (URL of photo should
+   automatically be added.)
+
+The image path is relative to your ``content`` folder. A URL of the photo is
+added to the end of the post as well.
+
 Background Notes (on Micro Blogging)
 ------------------------------------
 

@@ -10,6 +10,7 @@ from pelican.utils import get_date, pelican_open
 from pelican.readers import MarkdownReader
 
 from markupsafe import Markup
+from jinja2.utils import url_quote
 
 from .constants import (
     LOG_PREFIX,
@@ -48,11 +49,31 @@ def addMicroArticle(articleGenerator):
         # print(settings["MICROBLOG_SLUG"])
         print(metadata)
 
-        post_date = metadata["date"]
+        new_article_metadata = {
+            "category": myBaseReader.process_metadata("category", "µ"),
+            # "tags": myBaseReader.process_metadata("tags", "tagA, tagB"),
+            "micro": myBaseReader.process_metadata("micro", True),
+        }
+
         post_slug = settings["MICROBLOG_SLUG"].format(**metadata)
         metadata["slug"] = post_slug
-        post_save_as = settings["MICROBLOG_SAVE_AS"].format(**metadata)
-        post_url = settings["MICROBLOG_URL"].format(**metadata)
+        
+        new_article_metadata["title"] = myBaseReader.process_metadata("title", post_slug)
+        new_article_metadata["date"] = metadata["date"]
+        new_article_metadata["slug"] = post_slug
+        new_article_metadata["save_as"] = myBaseReader.process_metadata("save_as", settings["MICROBLOG_SAVE_AS"].format(**metadata))
+        new_article_metadata["url"] = myBaseReader.process_metadata("url", settings["MICROBLOG_URL"].format(**metadata))
+
+        if "image" in metadata.keys():
+            new_article_metadata["image"] = myBaseReader.process_metadata("image", metadata["image"])
+
+            # add image link to end of content
+            image_url = f'{settings["SITEURL"]}/{metadata["image"]}'
+            image_url = url_quote(image_url)  # Jinja filter "urlencode"
+
+            image_link = f'<a href={image_url}">{image_url}</a>'
+
+            content = content.removesuffix("</p>") + " " + image_link + "</p>"
 
         # warn if too long
         safe_content = Markup(content).striptags()
@@ -68,24 +89,16 @@ def addMicroArticle(articleGenerator):
                     settings["MICROBLOG_MAX_LENGTH"],
                 )
             )
+        new_article_metadata["char_len"] = post_len
+        
+        print(post_len)
 
-        newArticle = Article(
+        new_article = Article(
             content,
-            {
-                # "title": None,
-                "title": myBaseReader.process_metadata("title", post_slug),
-                "date": post_date,
-                "category": myBaseReader.process_metadata("category", "µ"),
-                # "tags": myBaseReader.process_metadata("tags", "tagA, tagB"),
-                "micro": myBaseReader.process_metadata("micro", True),
-                "slug": myBaseReader.process_metadata("slug", post_slug),
-                "save_as": myBaseReader.process_metadata("save_as", post_save_as),
-                "url": myBaseReader.process_metadata("url", post_url),
-                # "summary": myBaseReader.process_metadata("summary", False),
-            },
+            new_article_metadata,
         )
 
-        articleGenerator.articles.insert(0, newArticle)
+        articleGenerator.articles.insert(0, new_article)
         _micropost_count += 1
 
         # logging.debug(
