@@ -71,11 +71,14 @@ def check_settings(pelican):
             % (LOG_PREFIX, pelican.settings["MICROBLOG_URL"])
         )
 
-    pelican.settings["ARTICLE_EXCLUDES"] += pelican.settings["MICROBLOG_FOLDER"]
+    pelican.settings["ARTICLE_EXCLUDES"] += [pelican.settings["MICROBLOG_FOLDER"], ]
     logger.debug(
         '%s ARTICLE_EXCLUDES updated to "%s"'
         % (LOG_PREFIX, pelican.settings["ARTICLE_EXCLUDES"])
     )
+
+    # from pprint import pprint
+    # pprint(pelican.settings)
 
 
 def microblog_version(pelican):

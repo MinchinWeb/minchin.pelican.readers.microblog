@@ -1,7 +1,6 @@
 import codecs
 import os
 import re
-import logging
 
 import setuptools
 
@@ -42,15 +41,15 @@ LICENSE = find_meta(*META_PATH, meta_key="license")
 
 PACKAGES = setuptools.find_namespace_packages(
     exclude=(
-        "vendor_src",
         "test",
         "docs",
-        "css_src",
     )
 )
 
 INSTALL_REQUIRES = [
+    "minchin.pelican.plugins.autoloader >= 1.2.0",
     "pelican",
+    "markupsafe",
 ]
 
 EXTRA_REQUIRES = {

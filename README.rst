@@ -150,6 +150,26 @@ MICROBLOG_URL = ARTICLE_URL
    What URL to post the micro blog posts to. Defaults to using the same URL
    structure as you are using for articles. c.f. ``MICROBLOG_SAVE_AS``.
 
+Integration with Themes
+-----------------------
+
+For best support, you will need to modify your theme, or select a theme that
+already supports *Microblogging*, like my `seafoam
+<http://blog.minchin.ca/label/seafoam/>`_.
+
+Some helpful notes:
+
+- Microblog posts are considered ``Articles`` by Pelican, and will be included
+  in the ``articles`` and ``dates`` "lists".
+- Microblog posts all have ``article.micro = True``.
+- Microblog posts are added to the ``µ`` category.
+- Generally, you'll want to disregard and now show the title of the microblog
+  post. The title is set to the slug.
+- Because of their short length, it may make sense to display the whole body
+  (``article.content``) in places that a link via the title of the article is
+  typically shown.
+
+
 .. Changelog
 .. Known Issues
 .. Credits
