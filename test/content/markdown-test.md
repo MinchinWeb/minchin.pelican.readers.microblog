@@ -6,6 +6,7 @@ tags: markdown, test
 author: MinchinWeb
 category: test
 image: images/birger-strahl-olI66vtMgNo-unsplash.jpg
+subtitle: Get your Markdown rendering on!
 
 <div id="contents"></div>
 
