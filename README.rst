@@ -29,8 +29,8 @@ Quickstart
 
 1. Install the plugin via pip: ``pip install
    minchin.pelican.readers.microblogging``
-2. If needed, add the plugin to your configuration. Generally, the plugin
-   should be loaded automatically without effort on your part.
+2. Generally, the plugin should be loaded and configured automatically without
+   further effort on your part.
 3. Create a ``micro`` folder in your content folder (to hold your micro blog
    posts!).
 4. Create a new post in your ``micro`` folder. This can be generally be just
@@ -38,7 +38,8 @@ Quickstart
    (and ignored), ``slug`` will be auto-generated (based on the post date), and
    ``date`` will determined from the file creation datetime of the post file.
    If you provide the ``date``, it must be on the first line, in ``key: value``
-   format. The text body will be read as plain text!
+   format. The text body will be read as Markdown (so plain text effectively
+   works too)!
 5. Regenerate your Pelican site!
 
 Sample (Micro) Post File
@@ -71,16 +72,16 @@ added to the end of the post as well.
 Background Notes (on Micro Blogging)
 ------------------------------------
 
-Microblogging is generally considered to be blog posts, but very short in
-length.
+Microblogging is here considered to be blog posts, but very short in length.
 
 The most common example is Twitter, with an original limit of 140 characters
 (to be less than the SMS max of 160 characters). Twitter has since doubled
 their limit to 280 characters. The default on Mastodon is 500 characters, the
-same as (newly released) Threads.
-
-(Note that on Twitter, all links are run through a shortener and so are
-considered 23 characters long.)
+same as (newly released) Threads. (Note that on Twitter, all links are run
+through a shortener and so are considered 23 characters long.) Here, the
+default soft limit is 140 characters. You can choose to ignore that, or set a
+higher limit (via ``MICROBLOG_MAX_LENGTH``), but there are certain assumptions
+about presentation that start to fail as the posts get longer....
 
 Installation
 ------------
@@ -127,8 +128,8 @@ file) to alter the behavior of the plugin.
 If a value is given below, this represents the effective default value. If no
 value is given, the effective default value is ``None``.
 
-*Microblogging* also auto-configures itself when possible.  If you need to manually 
-create the default configuration, you would need the following: 
+*Microblogging* also auto-configures itself when possible.  If you need to
+manually create the default configuration, you would need the following: 
 
 .. code-block:: python 
 
@@ -184,7 +185,33 @@ Some helpful notes:
   (``article.content``) in places that a link via the title of the article is
   typically shown.
 
+Changelog
+---------
 
-.. Changelog
-.. Known Issues
+`Changelog <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/blob/master/CHANGELOG.rst>`_
+
+Roadmap
+-------
+
+These are features that I would like to eventually add to the plugin:
+
+- count links as 23 characters (*à la* Twitter)
+- process ReST microblog posts
+- CLI command to create microposts
+- add link previews
+- show (if applicable) that this is a reply to something (or a "re-tweet")
+- show replies to each post (borrow the comment setup?)
+- automatically add hashtags as (Pelican) tags
+
+
+Known Issues
+------------
+
+- Processing relies on Pelican's built-in Markdown reader.
+- The length of links to featured images will change if the ``SITE_URL``
+  changes. This can mean that the microblog post is "short" enough when
+  reviewing your site locally, but not when the site is generated for
+  publication.
+
+
 .. Credits
