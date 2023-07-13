@@ -69,6 +69,23 @@ Or a post with an image:
 The image path is relative to your ``content`` folder. A URL of the photo is
 added to the end of the post as well.
 
+Or with tags (or hashtags):
+
+.. code-block:: md
+
+   <!-- ./content/micro/202307131456.md -->
+
+   date: 2023-07-13 14:56 -0600
+   tags: Python, Pelican, Microblogging
+
+   I'm now Microblogging with Pelican!
+
+
+This will add links at the end of your post to the tags to the tag page for
+your (Pelican) site.
+
+For now, it does not pull tags out of the body of your post.
+
 Background Notes (on Micro Blogging)
 ------------------------------------
 

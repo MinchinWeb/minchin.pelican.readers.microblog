@@ -71,6 +71,18 @@ def addMicroArticle(articleGenerator):
 
             content = content.removesuffix("</p>") + " " + image_link + "</p>"
 
+        if "tags" in metadata.keys():
+            # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
+            new_article_metadata["tags"] = metadata["tags"]
+
+            # metadata["tags"] is already a list of `pelican.urlwrappers.Tag`
+            for tag in metadata["tags"]:
+                tag_url = settings["SITEURL"] + "/" + tag.url
+
+                tag_link = f'<a href="{tag_url}">#{tag.name}</a>'
+
+                content = content.removesuffix("</p>") + " " + tag_link + "</p>"
+
         # warn if too long
         safe_content = Markup(content).striptags()
         post_len = len(safe_content)
@@ -87,7 +99,7 @@ def addMicroArticle(articleGenerator):
             )
         new_article_metadata["char_len"] = post_len
 
-        print(post_len)
+        # print(post_len)
 
         new_article = Article(
             content,
