@@ -1,5 +1,10 @@
 .venv
+env
+
 build
-__pycache__
-test/output
+dist
 *.egg-info
+
+__pycache__
+
+test/output
