@@ -5,6 +5,7 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :release:`1.1.0 <2023-07-13>`
 - :feature:`7` Support hashtags, if given in frontend post metadata.
 - :release:`1.0.0 <2023-07-11>`
 - :support:`-` `seafoam <https://blog.minchin.ca/label/seafoam/>`_ v2.9.0 is
