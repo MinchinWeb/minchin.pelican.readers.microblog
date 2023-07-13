@@ -193,15 +193,35 @@ Changelog
 Roadmap
 -------
 
-These are features that I would like to eventually add to the plugin:
+These are features that I would like to eventually add to the plugin (and the
+issues I'm using to track their progress):
 
-- count links as 23 characters (*à la* Twitter)
-- process ReST microblog posts
-- CLI command to create microposts
-- add link previews
-- show (if applicable) that this is a reply to something (or a "re-tweet")
-- show replies to each post (borrow the comment setup?)
-- automatically add hashtags as (Pelican) tags
+- `Issue 1
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/1>`_
+  -- count links as 23 characters (*à la* Twitter)
+- `Issue 2
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/2>`_
+  -- process ReST microblog posts
+- `Issue 3
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/3>`_
+  -- CLI command to create microposts
+- `Issue 4
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/4>`_
+  -- add link previews
+- `Issue 5
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/5>`_
+  -- show (if applicable) that this is a reply to something (or a "re-tweet")
+- `Issue 6
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/6>`_
+  -- show replies to each post (borrow the comment setup?)
+- `Issue 7
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/7>`_
+  -- automatically add hashtags as (Pelican) tags
+
+Pull Requests to implement any of these are welcomed!
+
+- [x] update Seafoam theme
+- [x] make sorting work for microblog posts
 
 
 Known Issues
