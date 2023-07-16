@@ -5,6 +5,7 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :support:`-` note that the minimum support version of Python is 3.9.
 - :release:`1.1.0 <2023-07-13>`
 - :feature:`7` Support hashtags, if given in frontend post metadata.
 - :release:`1.0.0 <2023-07-11>`
