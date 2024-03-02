@@ -51,6 +51,7 @@ INSTALL_REQUIRES = [
     "pelican",
     "markupsafe",
     "jinja2",
+    "markdown",
 ]
 
 EXTRA_REQUIRES = {
@@ -71,12 +72,11 @@ EXTRA_REQUIRES = {
         # 'pydocstyle',
         # 'pycodestyle',
         # 'check-manifest'
-        "seafoam",
+        "seafoam >= 2.9.0",
         "pelican",
         "markdown",
     ],
     "dev": [
-        "markdown",
         "invoke",
         "black",
         "isort",

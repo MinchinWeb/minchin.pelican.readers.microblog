@@ -49,7 +49,7 @@ Sample (Micro) Post File
 
    <!-- ./content/micro/202307091701.md -->
 
-   date: 2023-07-09 17:01+0600
+   date: 2023-07-09 17:01
 
    I'm microblogging with Pelican!
    https://blog.minchin.ca/label/microblogging-pelican
@@ -60,7 +60,7 @@ Or a post with an image:
 
    <!-- ./content/micro/202307112138.md -->
 
-   date: 2023-07-11 21:38-0600
+   date: 2023-07-11 21:38
    image: images/birger-strahl-olI66vtMgNo-unsplash.jpg
 
    Microblog posts can have "feature" images too! (URL of photo should
@@ -75,7 +75,7 @@ Or with tags (or hashtags):
 
    <!-- ./content/micro/202307131456.md -->
 
-   date: 2023-07-13 14:56 -0600
+   date: 2023-07-13 14:56
    tags: Python, Pelican, Microblogging
 
    I'm now Microblogging with Pelican!
@@ -168,20 +168,23 @@ on `GitHub
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
 MICROBLOG_FOLDER = "micro"
-   Folder containing your micro blog posts, relative to your content root.
+   Folder containing your micro blog posts, relative to your content root
+   folder.
 MICROBLOG_MAX_LENGTH = 140
-   How long should your micro blog posts ve limited to. Pelican will emit a
+   How long should your micro blog posts be limited to. Pelican will emit a
    warning if you exceed this.
 MICROBLOG_SAVE_AS = ARTICLE_SAVE_AS
    What to save the micro blog posts output file as. Defaults to using the same
-   file structure as you are using for articles. c.f. ``MICROBLOG_URL``.
+   file structure as you are using for articles (aka "regular" posts). c.f.
+   ``MICROBLOG_URL``.
 MICROBLOG_SLUG = "u{date:%Y%m%d%H%M}"
    The slug that will be used for micro blog posts. Eg. ``u202307091701``.
 
    Note that Pelican expects slugs to be universally unique.
 MICROBLOG_URL = ARTICLE_URL
    What URL to post the micro blog posts to. Defaults to using the same URL
-   structure as you are using for articles. c.f. ``MICROBLOG_SAVE_AS``.
+   structure as you are using for articles (aka "regular" posts). c.f.
+   ``MICROBLOG_SAVE_AS``.
 
 Integration with Themes
 -----------------------
@@ -193,10 +196,10 @@ already supports *Microblogging*, like my `seafoam
 Some helpful notes:
 
 - Microblog posts are considered ``Articles`` by Pelican, and will be included
-  in the ``articles`` and ``dates`` "lists".
+  in the ``articles`` and ``dates`` "lists" provided by the templating engine.
 - Microblog posts all have ``article.micro = True``.
 - Microblog posts are added to the ``µ`` category.
-- Generally, you'll want to disregard and now show the title of the microblog
+- Generally, you'll want to disregard and not show the title of the microblog
   post. The title is set to the slug.
 - Because of their short length, it may make sense to display the whole body
   (``article.content``) in places that a link via the title of the article is
@@ -237,10 +240,6 @@ issues I'm using to track their progress):
 
 Pull Requests to implement any of these are welcomed!
 
-- [x] update Seafoam theme
-- [x] make sorting work for microblog posts
-
-
 Known Issues
 ------------
 
@@ -249,6 +248,13 @@ Known Issues
   changes. This can mean that the microblog post is "short" enough when
   reviewing your site locally, but not when the site is generated for
   publication.
-
+- microposts seem to mess up the ordering of the ``articles`` list passed to
+  the templating engine. Use ``dates`` instead (which is sorted by date)? -- `Issue 8
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/8>`_
+- linking to internal content from microposts (i.e.
+  `{filename}../regular-post.md`) crashes Pelican -- `Issue 9
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/9>`_
+- relies on `str.removesuffix()`, which means this only supports Python 3.9 or
+  better.
 
 .. Credits
