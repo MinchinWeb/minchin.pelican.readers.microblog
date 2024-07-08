@@ -38,7 +38,10 @@ def addMicroArticle(articleGenerator):
         content, metadata = myMarkdownReader.read(source_path=post)
 
         new_article_metadata = {
-            "category": myBaseReader.process_metadata("category", "µ"),
+            "category": myBaseReader.process_metadata(
+                "category",
+                settings.get("MICROBLOG_CATEGORY", "µ"),
+            ),
             # "tags": myBaseReader.process_metadata("tags", "tagA, tagB"),
             "micro": myBaseReader.process_metadata("micro", True),
         }
