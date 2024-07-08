@@ -49,6 +49,9 @@ def addMicroArticle(articleGenerator):
         post_slug = settings["MICROBLOG_SLUG"].format(**metadata)
         metadata["slug"] = post_slug
 
+        new_article_metadata["author"] = myBaseReader.process_metadata(
+            "author", settings["AUTHOR"]
+        )
         new_article_metadata["title"] = myBaseReader.process_metadata(
             "title", post_slug
         )
