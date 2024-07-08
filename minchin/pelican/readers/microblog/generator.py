@@ -104,6 +104,11 @@ def addMicroArticle(articleGenerator):
 
         # print(post_len)
 
+        # NOTE:
+        # new_article_metadata is set by pelicanconf.py
+        # metadata is set from the microblog post and is given higher precedence below.
+        new_article_metadata.update(metadata)
+
         new_article = Article(
             content,
             new_article_metadata,
