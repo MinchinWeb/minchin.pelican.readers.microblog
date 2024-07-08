@@ -167,9 +167,12 @@ on `GitHub
 
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
+MICROBLOG_APPEND_HASHTAGS = True
+   Tags gets appended towards the end of a micro blog post as hashtags tags
+   by default.
 MICROBLOG_CATEGORY = "µ"
-   Default category for your micro blog posts. It could be overriden by the metadata
-   on top of individual posts.
+   Default category for your micro blog posts. It could be overriden by the
+   metadata on top of individual posts.
 MICROBLOG_FOLDER = "micro"
    Folder containing your micro blog posts, relative to your content root
    folder.
