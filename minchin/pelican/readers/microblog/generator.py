@@ -6,7 +6,7 @@ from markupsafe import Markup
 
 from pelican.contents import Article
 from pelican.readers import MarkdownReader  # BaseReader
-from pelican.utils import get_date, pelican_open
+# from pelican.utils import get_date, pelican_open
 
 from .constants import LOG_PREFIX
 
