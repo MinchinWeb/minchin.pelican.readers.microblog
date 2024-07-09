@@ -6,9 +6,11 @@ from markupsafe import Markup
 
 from pelican.contents import Article
 from pelican.readers import MarkdownReader  # BaseReader
+
+from .constants import DEFAULT_MICROBLOG_CATEGORY, LOG_PREFIX
+
 # from pelican.utils import get_date, pelican_open
 
-from .constants import LOG_PREFIX
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +42,7 @@ def addMicroArticle(articleGenerator):
         new_article_metadata = {
             "category": myBaseReader.process_metadata(
                 "category",
-                settings.get("MICROBLOG_CATEGORY", "µ"),
+                settings.get("MICROBLOG_CATEGORY", DEFAULT_MICROBLOG_CATEGORY),
             ),
             # "tags": myBaseReader.process_metadata("tags", "tagA, tagB"),
             "micro": myBaseReader.process_metadata("micro", True),
