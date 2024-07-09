@@ -6,7 +6,7 @@ from markupsafe import Markup
 
 from pelican.contents import Article
 from pelican.readers import MarkdownReader  # BaseReader
-from pelican.utils import get_date, pelican_open
+# from pelican.utils import get_date, pelican_open
 
 from .constants import LOG_PREFIX
 
@@ -38,7 +38,10 @@ def addMicroArticle(articleGenerator):
         content, metadata = myMarkdownReader.read(source_path=post)
 
         new_article_metadata = {
-            "category": myBaseReader.process_metadata("category", "µ"),
+            "category": myBaseReader.process_metadata(
+                "category",
+                settings.get("MICROBLOG_CATEGORY", "µ"),
+            ),
             # "tags": myBaseReader.process_metadata("tags", "tagA, tagB"),
             "micro": myBaseReader.process_metadata("micro", True),
         }
@@ -46,6 +49,9 @@ def addMicroArticle(articleGenerator):
         post_slug = settings["MICROBLOG_SLUG"].format(**metadata)
         metadata["slug"] = post_slug
 
+        new_article_metadata["author"] = myBaseReader.process_metadata(
+            "author", settings["AUTHOR"]
+        )
         new_article_metadata["title"] = myBaseReader.process_metadata(
             "title", post_slug
         )
@@ -71,17 +77,18 @@ def addMicroArticle(articleGenerator):
 
             content = content.removesuffix("</p>") + " " + image_link + "</p>"
 
-        if "tags" in metadata.keys():
-            # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
-            new_article_metadata["tags"] = metadata["tags"]
+        if settings.get("MICROBLOG_APPEND_HASHTAGS", True):
+            if "tags" in metadata.keys():
+                # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
+                new_article_metadata["tags"] = metadata["tags"]
 
-            # metadata["tags"] is already a list of `pelican.urlwrappers.Tag`
-            for tag in metadata["tags"]:
-                tag_url = settings["SITEURL"] + "/" + tag.url
+                # metadata["tags"] is already a list of `pelican.urlwrappers.Tag`
+                for tag in metadata["tags"]:
+                    tag_url = settings["SITEURL"] + "/" + tag.url
 
-                tag_link = f'<a href="{tag_url}">#{tag.name}</a>'
+                    tag_link = f'<a href="{tag_url}">#{tag.name}</a>'
 
-                content = content.removesuffix("</p>") + " " + tag_link + "</p>"
+                    content = content.removesuffix("</p>") + " " + tag_link + "</p>"
 
         # warn if too long
         safe_content = Markup(content).striptags()
@@ -100,6 +107,11 @@ def addMicroArticle(articleGenerator):
         new_article_metadata["char_len"] = post_len
 
         # print(post_len)
+
+        # NOTE:
+        # new_article_metadata is set by pelicanconf.py
+        # metadata is set from the microblog post and is given higher precedence below.
+        new_article_metadata.update(metadata)
 
         new_article = Article(
             content,

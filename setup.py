@@ -140,7 +140,7 @@ setuptools.setup(
     packages=PACKAGES,
     package_data={"": ["README.rst", "CHANGELOG.rst", "LICENSE.txt"]},
     include_package_data=True,
-    python_requires='> 3.9',
+    python_requires='>= 3.9',
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRA_REQUIRES,
     platforms="any",

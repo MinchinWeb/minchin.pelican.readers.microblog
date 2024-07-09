@@ -146,27 +146,33 @@ If a value is given below, this represents the effective default value. If no
 value is given, the effective default value is ``None``.
 
 *Microblogging* also auto-configures itself when possible.  If you need to
-manually create the default configuration, you would need the following: 
+manually create the default configuration, you would need the following:
 
-.. code-block:: python 
+.. code-block:: python
 
-   # pelicanconf.py 
+   # pelicanconf.py
 
-   # if PLUGINS is not defined on Pelican 4.5+, these plugins will autoload 
-   PLUGINS = [ 
-       "minchin.pelican.readers.microblog", 
-       # others, as desired... 
-   ] 
+   # if PLUGINS is not defined on Pelican 4.5+, these plugins will autoload
+   PLUGINS = [
+       "minchin.pelican.readers.microblog",
+       # others, as desired...
+   ]
 
-   # the rest of the your configuration file... 
+   # the rest of the your configuration file...
 
 This documentation has to be manually updated. If the settings no longer match
 the plugin's behavior, or a setting is missing from here, please open a ticket
 on `GitHub
-<https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues>`_. 
+<https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues>`_.
 
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
+MICROBLOG_APPEND_HASHTAGS = True
+   Tags gets appended towards the end of a micro blog post as hashtags tags
+   by default.
+MICROBLOG_CATEGORY = "µ"
+   Default category for your micro blog posts. It could be overriden by the
+   metadata on top of individual posts.
 MICROBLOG_FOLDER = "micro"
    Folder containing your micro blog posts, relative to your content root
    folder.
