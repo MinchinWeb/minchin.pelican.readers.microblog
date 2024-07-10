@@ -15,4 +15,5 @@ releaser:
             - setuptools
             - wheel
             - semantic-version
+            - markdown
         pypi:

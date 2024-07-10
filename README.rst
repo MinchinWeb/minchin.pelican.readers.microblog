@@ -123,17 +123,17 @@ if you need to insrall them manually:
    pip install pelican
    pip install minchin.pelican.plugins.autoloader
 
+..
+    Additional Images
+    -----------------
 
-Additional Images
------------------
+    Micro blog post, using the Seafoam theme:
 
-Micro blog post, using the Seafoam theme:
+    (Placeholder image for the moment...)
 
-(Placeholder image for the moment...)
-
-.. image:: https://github.com/MinchinWeb/seafoam/raw/master/docs/screenshots/2.6.0/article_with_header.png
-   :align: center
-   :alt: Replace Image...
+    .. image:: https://github.com/MinchinWeb/seafoam/raw/master/docs/screenshots/2.6.0/article_with_header.png
+    :align: center
+    :alt: Replace Image...
 
 
 Pelican Settings

@@ -58,6 +58,7 @@ EXTRA_REQUIRES = {
     "build": [
         # "pip-tools",
         "minchin.releaser >= 0.8.2",
+        "setuptools",
     ],
     "docs": [
         # 'sphinx >= 1.4',  # theme requires at least 1.4
