@@ -51,9 +51,15 @@ def addMicroArticle(articleGenerator):
         post_slug = settings["MICROBLOG_SLUG"].format(**metadata)
         metadata["slug"] = post_slug
 
-        new_article_metadata["author"] = myBaseReader.process_metadata(
-            "author", settings["AUTHOR"]
-        )
+        try:
+            new_article_metadata["author"] = myBaseReader.process_metadata(
+                "author", settings["AUTHOR"]
+            )
+        except KeyError:
+            # if author isn't set by either the general settings or the
+            # micropost metadata, we don't need to force one
+            pass
+
         new_article_metadata["title"] = myBaseReader.process_metadata(
             "title", post_slug
         )
