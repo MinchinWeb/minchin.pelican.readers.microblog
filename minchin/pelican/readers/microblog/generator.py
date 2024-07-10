@@ -85,15 +85,14 @@ def addMicroArticle(articleGenerator):
 
             content = content.removesuffix("</p>") + " " + image_link + "</p>"
 
-        if settings.get("MICROBLOG_APPEND_HASHTAGS", True):
-            if "tags" in metadata.keys():
-                # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
-                new_article_metadata["tags"] = metadata["tags"]
+        if "tags" in metadata.keys():
+            # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
+            new_article_metadata["tags"] = metadata["tags"]
 
+            if settings.get("MICROBLOG_APPEND_HASHTAGS", True):
                 # metadata["tags"] is already a list of `pelican.urlwrappers.Tag`
                 for tag in metadata["tags"]:
                     tag_url = settings["SITEURL"] + "/" + tag.url
-
                     tag_link = f'<a href="{tag_url}">#{tag.name}</a>'
 
                     content = content.removesuffix("</p>") + " " + tag_link + "</p>"

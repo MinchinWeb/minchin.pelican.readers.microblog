@@ -172,8 +172,8 @@ AUTHOR
     the top of individual posts. (Regular Pelican setting; you don't have to
     supply an author.)
 MICROBLOG_APPEND_HASHTAGS = True
-   Tags gets appended towards the end of a micro blog post as hashtags tags
-   by default.
+   Tags gets appended at the end of the micro blog post as hashtags.
+   *#taggedyou*
 MICROBLOG_CATEGORY = "µ"
    Default category for your micro blog posts. It could be overwritten by the
    metadata on top of individual posts.
