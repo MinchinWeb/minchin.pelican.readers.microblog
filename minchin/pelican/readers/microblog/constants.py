@@ -7,3 +7,5 @@ __url__ = "https://blog.minchin.ca/label/microblogging-pelican/"
 __license__ = "MIT License"
 
 LOG_PREFIX = "[Microblog]"
+
+DEFAULT_MICROBLOG_CATEGORY = "µ"

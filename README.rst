@@ -167,12 +167,19 @@ on `GitHub
 
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
+AUTHOR
+    Default author for micro blog posts. Can be overwritten by the metadata at
+    the top of individual posts. (Regular Pelican setting; you don't have to
+    supply an author.)
 MICROBLOG_APPEND_HASHTAGS = True
-   Tags gets appended towards the end of a micro blog post as hashtags tags
-   by default.
+   Tags gets appended at the end of the micro blog post as hashtags.
+   *#taggedyou*
 MICROBLOG_CATEGORY = "µ"
-   Default category for your micro blog posts. It could be overriden by the
+   Default category for your micro blog posts. It could be overwritten by the
    metadata on top of individual posts.
+   
+   Note that Pelican will render the slug (used in URLs) for this default as
+   ``m``.
 MICROBLOG_FOLDER = "micro"
    Folder containing your micro blog posts, relative to your content root
    folder.
@@ -204,7 +211,7 @@ Some helpful notes:
 - Microblog posts are considered ``Articles`` by Pelican, and will be included
   in the ``articles`` and ``dates`` "lists" provided by the templating engine.
 - Microblog posts all have ``article.micro = True``.
-- Microblog posts are added to the ``µ`` category.
+- Microblog posts are added to the ``µ`` category (by default).
 - Generally, you'll want to disregard and not show the title of the microblog
   post. The title is set to the slug.
 - Because of their short length, it may make sense to display the whole body

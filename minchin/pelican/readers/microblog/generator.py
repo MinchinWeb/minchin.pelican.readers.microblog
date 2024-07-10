@@ -6,9 +6,11 @@ from markupsafe import Markup
 
 from pelican.contents import Article
 from pelican.readers import MarkdownReader  # BaseReader
+
+from .constants import DEFAULT_MICROBLOG_CATEGORY, LOG_PREFIX
+
 # from pelican.utils import get_date, pelican_open
 
-from .constants import LOG_PREFIX
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +42,7 @@ def addMicroArticle(articleGenerator):
         new_article_metadata = {
             "category": myBaseReader.process_metadata(
                 "category",
-                settings.get("MICROBLOG_CATEGORY", "µ"),
+                settings.get("MICROBLOG_CATEGORY", DEFAULT_MICROBLOG_CATEGORY),
             ),
             # "tags": myBaseReader.process_metadata("tags", "tagA, tagB"),
             "micro": myBaseReader.process_metadata("micro", True),
@@ -49,9 +51,15 @@ def addMicroArticle(articleGenerator):
         post_slug = settings["MICROBLOG_SLUG"].format(**metadata)
         metadata["slug"] = post_slug
 
-        new_article_metadata["author"] = myBaseReader.process_metadata(
-            "author", settings["AUTHOR"]
-        )
+        try:
+            new_article_metadata["author"] = myBaseReader.process_metadata(
+                "author", settings["AUTHOR"]
+            )
+        except KeyError:
+            # if author isn't set by either the general settings or the
+            # micropost metadata, we don't need to force one
+            pass
+
         new_article_metadata["title"] = myBaseReader.process_metadata(
             "title", post_slug
         )
@@ -77,15 +85,14 @@ def addMicroArticle(articleGenerator):
 
             content = content.removesuffix("</p>") + " " + image_link + "</p>"
 
-        if settings.get("MICROBLOG_APPEND_HASHTAGS", True):
-            if "tags" in metadata.keys():
-                # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
-                new_article_metadata["tags"] = metadata["tags"]
+        if "tags" in metadata.keys():
+            # new_article_metadata["tags"] = myBaseReader.process_metadata("tags", metadata["tags"])
+            new_article_metadata["tags"] = metadata["tags"]
 
+            if settings.get("MICROBLOG_APPEND_HASHTAGS", True):
                 # metadata["tags"] is already a list of `pelican.urlwrappers.Tag`
                 for tag in metadata["tags"]:
                     tag_url = settings["SITEURL"] + "/" + tag.url
-
                     tag_link = f'<a href="{tag_url}">#{tag.name}</a>'
 
                     content = content.removesuffix("</p>") + " " + tag_link + "</p>"
