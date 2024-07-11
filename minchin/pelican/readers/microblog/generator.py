@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import bisect
 import logging
 import os
 from typing import TYPE_CHECKING
@@ -131,7 +132,12 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
             new_article_metadata,
         )
 
-        articleGenerator.articles.insert(0, new_article)
+        # Find insertion point assuming articles list is sorted in reverse-chronological order
+        bisect.insort(
+            articleGenerator.articles,
+            new_article,
+            key=lambda article: -article.date.timestamp()
+        )
         _micropost_count += 1
 
 
