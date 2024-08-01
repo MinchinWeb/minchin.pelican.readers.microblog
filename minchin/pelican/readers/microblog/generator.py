@@ -4,6 +4,7 @@ import bisect
 import logging
 import os
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from pelican import Pelican
     from pelican.generators import ArticlesGenerator
@@ -133,11 +134,21 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         )
 
         # Find insertion point assuming articles list is sorted in reverse-chronological order
-        bisect.insort(
-            articleGenerator.articles,
-            new_article,
-            key=lambda article: -article.date.timestamp()
-        )
+        article_order_by = settings.get("ARTICLE_ORDER_BY", "reversed-date")
+        if article_order_by == "date":
+
+            def ordering_key(article):
+                return article.date.timestamp()
+        elif article_order_by == "reversed-date":
+
+            def ordering_key(article):
+                return -article.date.timestamp()
+        else:
+            raise NotImplementedError(
+                f"Pelcian configuration value {article_order_by=} unsupported"
+            )
+
+        bisect.insort(articleGenerator.articles, new_article, key=ordering_key)
         _micropost_count += 1
 
 
