@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import bisect
 import logging
 import os
 from typing import TYPE_CHECKING
@@ -14,6 +13,7 @@ from markupsafe import Markup
 
 from pelican.contents import Article
 from pelican.readers import MarkdownReader  # BaseReader
+from pelican.utils import order_content
 
 from .constants import DEFAULT_MICROBLOG_CATEGORY, LOG_PREFIX
 
@@ -133,23 +133,14 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
             new_article_metadata,
         )
 
-        # Find insertion point assuming articles list is sorted in reverse-chronological order
-        ARTICLE_ORDER_BY = settings.get("ARTICLE_ORDER_BY", "reversed-date")
-        if ARTICLE_ORDER_BY == "date":
-
-            def ordering_key(article):
-                return article.date.timestamp()
-        elif ARTICLE_ORDER_BY == "reversed-date":
-
-            def ordering_key(article):
-                return -article.date.timestamp()
-        else:
-            raise NotImplementedError(
-                f"Pelican configuration value {ARTICLE_ORDER_BY=} unsupported"
-            )
-
-        bisect.insort(articleGenerator.articles, new_article, key=ordering_key)
+        articleGenerator.articles.insert(0, new_article)
         _micropost_count += 1
+
+    # apply sorting
+    logger.debug(f'{LOG_PREFIX} sorting order: "{settings.get("ARTICLE_ORDER_BY", "reversed-date")}"')
+    articleGenerator.articles = order_content(
+        articleGenerator.articles, settings.get("ARTICLE_ORDER_BY", "reversed-date")
+    )
 
 
 def pelican_finalized(pelican: Pelican) -> None:
