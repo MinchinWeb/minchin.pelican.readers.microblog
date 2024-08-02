@@ -136,8 +136,10 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         articleGenerator.articles.insert(0, new_article)
         _micropost_count += 1
 
+    # apply sorting
+    logger.debug(f'{LOG_PREFIX} sorting order: "{settings.get("ARTICLE_ORDER_BY", "reversed-date")}"')
     articleGenerator.articles = order_content(
-        articleGenerator.articles, settings.get("ARTICLE_ORDER_BY", "slug")
+        articleGenerator.articles, settings.get("ARTICLE_ORDER_BY", "reversed-date")
     )
 
 
