@@ -1,5 +1,13 @@
+from __future__ import annotations
+
+import bisect
 import logging
 import os
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pelican import Pelican
+    from pelican.generators import ArticlesGenerator
 
 from jinja2.utils import url_quote
 from markupsafe import Markup
@@ -17,7 +25,7 @@ logger = logging.getLogger(__name__)
 _micropost_count = 0
 
 
-def addMicroArticle(articleGenerator):
+def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
     global _micropost_count
 
     settings = articleGenerator.settings
@@ -125,11 +133,26 @@ def addMicroArticle(articleGenerator):
             new_article_metadata,
         )
 
-        articleGenerator.articles.insert(0, new_article)
+        # Find insertion point assuming articles list is sorted in reverse-chronological order
+        ARTICLE_ORDER_BY = settings.get("ARTICLE_ORDER_BY", "reversed-date")
+        if ARTICLE_ORDER_BY == "date":
+
+            def ordering_key(article):
+                return article.date.timestamp()
+        elif ARTICLE_ORDER_BY == "reversed-date":
+
+            def ordering_key(article):
+                return -article.date.timestamp()
+        else:
+            raise NotImplementedError(
+                f"Pelican configuration value {ARTICLE_ORDER_BY=} unsupported"
+            )
+
+        bisect.insort(articleGenerator.articles, new_article, key=ordering_key)
         _micropost_count += 1
 
 
-def pelican_finalized(pelican):
+def pelican_finalized(pelican: Pelican) -> None:
     global _micropost_count
     print(
         "%s Processed %s micropost%s."
