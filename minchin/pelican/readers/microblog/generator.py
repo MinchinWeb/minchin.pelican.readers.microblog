@@ -134,18 +134,18 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         )
 
         # Find insertion point assuming articles list is sorted in reverse-chronological order
-        article_order_by = settings.get("ARTICLE_ORDER_BY", "reversed-date")
-        if article_order_by == "date":
+        ARTICLE_ORDER_BY = settings.get("ARTICLE_ORDER_BY", "reversed-date")
+        if ARTICLE_ORDER_BY == "date":
 
             def ordering_key(article):
                 return article.date.timestamp()
-        elif article_order_by == "reversed-date":
+        elif ARTICLE_ORDER_BY == "reversed-date":
 
             def ordering_key(article):
                 return -article.date.timestamp()
         else:
             raise NotImplementedError(
-                f"Pelcian configuration value {article_order_by=} unsupported"
+                f"Pelican configuration value {ARTICLE_ORDER_BY=} unsupported"
             )
 
         bisect.insort(articleGenerator.articles, new_article, key=ordering_key)
