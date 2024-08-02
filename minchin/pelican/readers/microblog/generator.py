@@ -1,11 +1,19 @@
+from __future__ import annotations
+
 import logging
 import os
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pelican import Pelican
+    from pelican.generators import ArticlesGenerator
 
 from jinja2.utils import url_quote
 from markupsafe import Markup
 
 from pelican.contents import Article
 from pelican.readers import MarkdownReader  # BaseReader
+from pelican.utils import order_content
 
 from .constants import DEFAULT_MICROBLOG_CATEGORY, LOG_PREFIX
 
@@ -17,7 +25,7 @@ logger = logging.getLogger(__name__)
 _micropost_count = 0
 
 
-def addMicroArticle(articleGenerator):
+def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
     global _micropost_count
 
     settings = articleGenerator.settings
@@ -128,8 +136,12 @@ def addMicroArticle(articleGenerator):
         articleGenerator.articles.insert(0, new_article)
         _micropost_count += 1
 
+    articleGenerator.articles = order_content(
+        articleGenerator.articles, settings.get("ARTICLE_ORDER_BY", "slug")
+    )
 
-def pelican_finalized(pelican):
+
+def pelican_finalized(pelican: Pelican) -> None:
     global _micropost_count
     print(
         "%s Processed %s micropost%s."
