@@ -46,6 +46,8 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         post = settings["PATH"] + os.sep + post
 
         content, metadata = myMarkdownReader.read(source_path=post)
+        # count lenght on content before adding tag and image links
+        linkless_content = content
 
         new_article_metadata = {
             "category": myBaseReader.process_metadata(
@@ -108,7 +110,8 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
                     content = content.removesuffix("</p>") + " " + tag_link + "</p>"
 
         # warn if too long
-        safe_content = Markup(content).striptags()
+        # ignore added tag and image links here
+        safe_content = Markup(linkless_content).striptags()
         post_len = len(safe_content)
         if post_len > settings["MICROBLOG_MAX_LENGTH"] + 6:
             relative_filename = post.removeprefix(settings["PATH"])

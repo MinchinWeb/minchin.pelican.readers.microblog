@@ -5,6 +5,8 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :bug:`- major` Ignore appended (hash)tags and featured image links in
+  determining post length.
 - :bug:`- major` Rework creation of featured image links so the link is
   actually valid.
 - :bug:`- major` Apply CSS class (of ``.microblog-post-image``) to appended
