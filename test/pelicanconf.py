@@ -56,3 +56,7 @@ DISPLAY_BREADCRUMBS = True
 DISPLAY_CATEGORY_IN_BREADCRUMBS = True
 
 HIDE_SIDEBAR = True
+
+
+# ARTICLE_ORDER_BY = 'reversed-date'  # should be default value
+# ARTICLE_ORDER_BY = 'date'
