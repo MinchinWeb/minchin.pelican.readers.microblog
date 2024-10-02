@@ -5,6 +5,10 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :bug:`- major` Rework creation of featured image links so the link is
+  actually valid.
+- :bug:`- major` Apply CSS class (of ``.microblog-post-image``) to appended
+  featured image links. Thus, conditional display of them is possible.
 - :bug:`- major` Apply CSS class (of ``.microblog-post-tag``) to appended tags.
   Thus, conditional display of them is possible.
 - :feature:`13` Set ``ARTICLE_ORDER_BY`` (a default Pelican setting) to control

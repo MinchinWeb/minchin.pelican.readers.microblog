@@ -219,6 +219,8 @@ Some helpful notes:
   (``article.content``) in places that a link via the title of the article is
   typically shown.
 - Appended tags have the CSS class ``.microblog-post-tag`` applied.
+- Appended links to featured images have the CSS class
+  ``.microblog-post-image`` applied.
 
 Changelog
 ---------

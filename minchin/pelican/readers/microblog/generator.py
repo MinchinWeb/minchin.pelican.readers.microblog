@@ -86,10 +86,12 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
             )
 
             # add image link to end of content
-            image_url = f'{settings["SITEURL"]}/{metadata["image"]}'
-            image_url = url_quote(image_url)  # Jinja filter "urlencode"
 
-            image_link = f'<a href={image_url}">{image_url}</a>'
+            image_url = f'{settings["SITEURL"]}'
+            image_url += "/" if not settings["SITEURL"].endswith("/") else ""
+            image_url += url_quote(metadata["image"])  # Jinja filter "urlencode"
+
+            image_link = f'<a href={image_url} class="microblog-post-image">{image_url}</a>'
 
             content = content.removesuffix("</p>") + " " + image_link + "</p>"
 
