@@ -5,8 +5,10 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :feature:`13` Set ``ARTICLE_ORDER_BY`` (a default Pelican setting) to control
+  micropost sort order. Makes microposts sort as expected.
 - :release:`1.2.0 <2024-07-09>`
-- :feature:`11` ALlow turning off adding tags as hashtags at the end of the
+- :feature:`11` Allow turning off adding tags as hashtags at the end of the
   micropost (see ``MICROBLOG_APPEND_HASHTAGS`` setting).
 - :feature:`11` Allow setting micropost category through post metadata.
 - :feature:`11` Allow setting micropost author through post metadata. Defaults
