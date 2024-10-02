@@ -74,7 +74,7 @@ EXTRA_REQUIRES = {
         # 'pycodestyle',
         # 'check-manifest'
         "seafoam >= 2.9.0",
-        "pelican",
+        "pelican >= 2.10.3",
         "markdown",
     ],
     "dev": [

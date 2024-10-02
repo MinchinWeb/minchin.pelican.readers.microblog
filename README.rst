@@ -173,7 +173,8 @@ AUTHOR
     supply an author.)
 MICROBLOG_APPEND_HASHTAGS = True
    Tags gets appended at the end of the micro blog post as hashtags.
-   *#taggedyou*
+   *#taggedyou*  Tags have the CSS class ``.microblog-post-tag`` applied, if
+   you want to conditionally control their display or formatting.
 MICROBLOG_CATEGORY = "µ"
    Default category for your micro blog posts. It could be overwritten by the
    metadata on top of individual posts.
@@ -217,6 +218,7 @@ Some helpful notes:
 - Because of their short length, it may make sense to display the whole body
   (``article.content``) in places that a link via the title of the article is
   typically shown.
+- Appended tags have the CSS class ``.microblog-post-tag`` applied.
 
 Changelog
 ---------

@@ -5,6 +5,8 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :bug:`- major` Apply CSS class (of ``.microblog-post-tag``) to appended tags.
+  Thus, conditional display of them is possible.
 - :feature:`13` Set ``ARTICLE_ORDER_BY`` (a default Pelican setting) to control
   micropost sort order. Makes microposts sort as expected.
 - :release:`1.2.0 <2024-07-09>`

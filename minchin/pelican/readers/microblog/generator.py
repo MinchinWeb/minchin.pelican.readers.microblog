@@ -101,7 +101,7 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
                 # metadata["tags"] is already a list of `pelican.urlwrappers.Tag`
                 for tag in metadata["tags"]:
                     tag_url = settings["SITEURL"] + "/" + tag.url
-                    tag_link = f'<a href="{tag_url}">#{tag.name}</a>'
+                    tag_link = f'<a href="{tag_url}" class="microblog-post-tag">#{tag.name}</a>'
 
                     content = content.removesuffix("</p>") + " " + tag_link + "</p>"
 
