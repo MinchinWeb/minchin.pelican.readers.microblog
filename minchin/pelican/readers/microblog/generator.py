@@ -113,6 +113,7 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         # ignore added tag and image links here
         safe_content = Markup(linkless_content).striptags()
         post_len = len(safe_content)
+        # why the plus six here??
         if post_len > settings["MICROBLOG_MAX_LENGTH"] + 6:
             relative_filename = post.removeprefix(settings["PATH"])
             logger.warning(

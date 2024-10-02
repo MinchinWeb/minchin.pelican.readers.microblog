@@ -5,16 +5,19 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :release:`1.3.0 <2024-10-01>`
 - :bug:`- major` Ignore appended (hash)tags and featured image links in
-  determining post length.
-- :bug:`- major` Rework creation of featured image links so the link is
+  determining post length. C.f. `Issue #1
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/1>`_.
+- :bug:`10 major` Rework creation of featured image links so the link is
   actually valid.
 - :bug:`- major` Apply CSS class (of ``.microblog-post-image``) to appended
   featured image links. Thus, conditional display of them is possible.
 - :bug:`- major` Apply CSS class (of ``.microblog-post-tag``) to appended tags.
   Thus, conditional display of them is possible.
 - :feature:`13` Set ``ARTICLE_ORDER_BY`` (a default Pelican setting) to control
-  micropost sort order. Makes microposts sort as expected.
+  micropost sort order. Makes microposts sort as expected. C.f. `Issue #8
+  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/8>`_.
 - :release:`1.2.0 <2024-07-09>`
 - :feature:`11` Allow turning off adding tags as hashtags at the end of the
   micropost (see ``MICROBLOG_APPEND_HASHTAGS`` setting).

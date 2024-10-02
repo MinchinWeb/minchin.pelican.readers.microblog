@@ -167,6 +167,9 @@ on `GitHub
 
 .. use the ".. data::" directive here for Sphinx output, but on GitHub, that just causes everything to disappear
 
+ARTICLE_ORDER_BY = "reverse-date"
+   Sorting order for micro blog posts (also used for sorting posts generally);
+   micro posts will be sorted among all posts. (Regular Pelican setting)
 AUTHOR
     Default author for micro blog posts. Can be overwritten by the metadata at
     the top of individual posts. (Regular Pelican setting; you don't have to
